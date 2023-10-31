@@ -16,7 +16,4 @@ jobs:
       username: ${{ secrets.AWS_USER }}
       key: ${{ secrets.AWS_KEY }}
       script: |
-       PATH=$PATH:/${{secrets.SSH_USER_NAME}}/.npm-global/bin/pm2 kill
-       cd /home/ubuntu/github-actions-ec2
-       git pull origin master
-       PATH=$PATH:/${{secrets.SSH_USER_NAME}}/.npm-global/bin/pm2 start "npm start"
+       echo $PATH
