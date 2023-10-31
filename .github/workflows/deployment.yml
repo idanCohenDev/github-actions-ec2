@@ -1,0 +1,22 @@
+name: CI/CD pipeline demo
+
+on:
+ push:
+  branches:
+   - master
+
+jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Deploy application
+     uses: appleboy/ssh-action@master
+     with:
+      host: ${{ secrets.AWS_PROD_HOST }}
+      username: ${{ secrets.AWS_USER }}
+      key: ${{ secrets.AWS_KEY }}
+      script: |
+       pm2 kill
+       cd /home/ubuntu/<YOUR_APP_NAME>
+       git pull origin master
+       pm2 start "npm start"
