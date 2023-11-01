@@ -15,4 +15,8 @@ jobs:
       host: ${{ secrets.AWS_PROD_HOST }}
       username: ${{ secrets.AWS_USER }}
       key: ${{ secrets.AWS_KEY }}
-      script: sh deploy.sh
+      script: |
+       sudo pm2 kill
+       cd /home/ubuntu/<YOUR_APP_NAME>
+       git pull origin master
+       sudo pm2 start "npm start"
